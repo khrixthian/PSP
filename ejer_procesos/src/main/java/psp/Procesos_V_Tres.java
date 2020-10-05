@@ -3,7 +3,7 @@ package psp;
 import java.io.File;
 import java.io.IOException;
 
-public class Frame1 {
+public class Procesos_V_Tres {
 
 	public static void main(String[] args) {
 		//Haz un programa llamado Frame1 que lance una ventana con un botón. Al pulsarlo finaliza el
@@ -14,19 +14,18 @@ public class Frame1 {
 		ProcessBuilder pb = new ProcessBuilder();
 		
 		pb.directory(new File(".//bin"));
-		pb = pb.command("java","ejer 12");
+		pb = pb.command("java","psp.Frame1");
 		
 		try {
 			Process pro = pb.start();
 			int valorSalida = pro.waitFor();
+			System.out.println("Lo que devuelve al cerrar la ventana: " + valorSalida);
 			
 		}catch(IOException e){
 			e.printStackTrace();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 
 	}
 
