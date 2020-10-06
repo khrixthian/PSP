@@ -13,6 +13,7 @@ ProcessBuilder pb = new ProcessBuilder("CMD", "/C", "E:\\DESARROLLO DE APLICACIO
 		File fitSalida = new File("E:\\DESARROLLO DE APLICACIONES MULTIMEDIA\\2 ANYO\\PSP\\fitxeros\\guardar salida2.txt");
 		File fitError = new File("E:\\DESARROLLO DE APLICACIONES MULTIMEDIA\\2 ANYO\\PSP\\fitxeros\\guardar errores2.txt");
 		
+		
 		pb.redirectOutput(fitSalida);//escribir en un fichero la salida del comando
 		pb.redirectError(fitError);//escribir errores en otro fichero
 		pb.start();

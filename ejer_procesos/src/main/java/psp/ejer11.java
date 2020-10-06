@@ -16,7 +16,8 @@ public class ejer11 {
 			System.out.println(); 
 			int c; 
 			while ((c = is.read()) != -1) 
-			System.out.print((char) c); is.close(); 
+			System.out.print((char) c); 
+			is.close(); 
 			} catch (Exception e) { 
 			e.printStackTrace();
 			}

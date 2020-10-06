@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Procesos_V_Tres {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		//Haz un programa llamado Frame1 que lance una ventana con un botón. Al pulsarlo finaliza el
 		//programa.
 		//Haz otro programa llamado Procesos_V_Tres que lance Frame1 y espere hasta que finalice,
@@ -13,21 +13,15 @@ public class Procesos_V_Tres {
 		
 		//NO VA
 		
-		ProcessBuilder pb = new ProcessBuilder();
+		ProcessBuilder pb = new ProcessBuilder("java","psp.Frame1");
 		
-		pb.directory(new File(".//bin"));
-		pb = pb.command("java","psp.Frame1");
+		pb.directory(new File("bin"));
+		//pb = pb.command("java","Frame1");
 		
-		try {
 			Process pro = pb.start();
 			int valorSalida = pro.waitFor();
 			System.out.println("Lo que devuelve al cerrar la ventana: " + valorSalida);
-			
-		}catch(IOException e){
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}		
+				
 
 	}
 

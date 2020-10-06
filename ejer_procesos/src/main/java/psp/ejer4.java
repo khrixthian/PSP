@@ -7,7 +7,7 @@ public class ejer4 {
 	public static void main(String[] args) {
 		// Cambiar la fecha del sistema a través de un proceso en java.
 		ProcessBuilder test = new ProcessBuilder();
-		test = test.command("CMD", "/C", "time"); 
+		test = test.command("CMD", "/C", "date"); 
 		try { 
 			Process p1 = test.start(); 
 			InputStream is = p1.getInputStream(); 
