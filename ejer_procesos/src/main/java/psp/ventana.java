@@ -70,9 +70,9 @@ public class ventana extends JFrame {
 		panel1.setBounds(136, 216, 276, 308);
 		panel.add(panel1);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(444, 216, 297, 308);
-		panel.add(textPane);
+		JTextPane panel2 = new JTextPane();
+		panel2.setBounds(444, 216, 297, 308);
+		panel.add(panel2);
 		
 		JLabel resPid1 = new JLabel("");
 		resPid1.setBounds(110, 110, 46, 14);
