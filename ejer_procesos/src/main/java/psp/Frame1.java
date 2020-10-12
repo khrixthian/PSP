@@ -1,44 +1,52 @@
 package psp;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Frame1 extends JFrame {
 
-	public JPanel panel;
-	public JButton boton;
-	
-	public Frame1() {
-		
-		setSize(300, 200);
-		panel = new JPanel();
-		setContentPane(panel);
-		panel.setLayout(null);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false); 
-		setLocationRelativeTo(null);
-		
-		boton = new JButton("Cerrar");
-		boton.setBounds(100, 66, 100, 25);
-		panel.add(boton);
-	
-	
-	boton.addActionListener(new ActionListener() {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.exit(0);
-			dispose();//cerrar la ventana
-		}
-	});
-}
-	
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
-		new Frame1();
-		new Frame1().setVisible(true);	
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Frame1 frame = new Frame1();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Frame1() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
+		
+		JButton btnNewButton = new JButton("Cierra");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		contentPane.add(btnNewButton, BorderLayout.CENTER);
 	}
 
 }

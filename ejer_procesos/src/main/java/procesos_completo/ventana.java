@@ -1,8 +1,11 @@
-package psp;
+package procesos_completo;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.io.*;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 import javax.swing.*;
 import javax.swing.JFrame;
@@ -91,7 +94,7 @@ public class ventana extends JFrame {
 		panel.add(resPidPadre2);
 		
 		JLabel resPid3 = new JLabel("");
-		resPid3.setBounds(494, 110, 46, 14);
+		resPid3.setBounds(494, 110, 268, 14);
 		panel.add(resPid3);
 		
 		JLabel resPidPadre3 = new JLabel("");
@@ -121,6 +124,34 @@ public class ventana extends JFrame {
 		}
 	});
 	
+	boton3.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e)  {
+			
+			ProcessBuilder pb = new ProcessBuilder("java","programa");
+			pb.directory(new File("bin"));
+			
+			try {
+				Process p = pb.start();				
+				OutputStream os = p.getOutputStream();
+				String res = p.toString();
+				os.write(res.getBytes());
+				os.flush();
+				
+				String binary = new BigInteger(String.valueOf(p.pid()).getBytes()).toString(2);
+				resPid3.setText(binary);
+				resPidPadre3.setText(String.valueOf(p.toHandle().parent().get().pid()));
+				
+				panel2.setText(res); //no consigo que muestre mas 
+			
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	});
+	
 	boton2.addActionListener(new ActionListener() {
 		
 		@Override
@@ -130,7 +161,7 @@ public class ventana extends JFrame {
 			ProcessBuilder test = new ProcessBuilder();
 			test = test.command("CMD", "/C", prog);
 			Process p;
-			String res = String.valueOf(test);
+			String res = test.toString();
 			
 			try {
 				test.start();
@@ -139,24 +170,13 @@ public class ventana extends JFrame {
 				resPid2.setText(String.valueOf(p.pid()));
 				resPidPadre2.setText(String.valueOf(p.toHandle().parent().get().pid()));
 				
-				panel1.setText(res);
+				panel1.setText(res);//no consigo que muestre mas
 				
 				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
-			//try { 
-				//	Process p1 = test.start(); 
-				//	InputStream is = p1.getInputStream(); 
-				//	System.out.println(); 
-				//	int c; 
-				//	while ((c = is.read()) != -1) 
-				//	System.out.print((char) c); is.close(); 
-				//	} catch (Exception e) { 
-				//	e.printStackTrace();
-				//	}
 		}
 	});
 }

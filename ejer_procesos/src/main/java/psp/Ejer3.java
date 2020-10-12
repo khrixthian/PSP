@@ -5,16 +5,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-public class ejer3_2 {
+public class Ejer3 {
 
 	public static void main(String[] args) throws IOException {
 
-		ProcessBuilder pb = new ProcessBuilder("java","ejer3_1");
+		// TODO Auto-generated method stub
+		
+		
+		ProcessBuilder pb = new ProcessBuilder("java","EjemploLectura");
 		pb.directory(new File("bin"));
 		Process p = pb.start();
 
 		OutputStream os = p.getOutputStream();
-		String dato = "hola";
+		String dato = "IKER\\n";
 		os.write(dato.getBytes());
 		os.flush();
 

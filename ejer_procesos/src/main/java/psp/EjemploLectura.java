@@ -1,7 +1,7 @@
 package psp;
 
 import java.io.*;
-public class ejer3_1{
+public class EjemploLectura{
  public static void main (String [] args)
  {
    InputStreamReader in = new InputStreamReader(System.in);
@@ -15,4 +15,4 @@ public class ejer3_1{
     in.close();	 
    }catch (Exception e) { e.printStackTrace();}	
  }
-}
+}//EjemploLectura
