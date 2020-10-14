@@ -19,6 +19,7 @@ public class ventana extends JFrame {
 	private JTextField tf2;
 	private JTextField tf3;
 	private JButton boton3;
+	JTextPane panel2;
 	
 	public ventana() {
 		
@@ -73,7 +74,7 @@ public class ventana extends JFrame {
 		panel1.setBounds(136, 216, 276, 308);
 		panel.add(panel1);
 		
-		JTextPane panel2 = new JTextPane();
+		panel2 = new JTextPane();
 		panel2.setBounds(444, 216, 297, 308);
 		panel.add(panel2);
 		
@@ -128,27 +129,40 @@ public class ventana extends JFrame {
 		
 		@Override
 		public void actionPerformed(ActionEvent e)  {
-			
-			ProcessBuilder pb = new ProcessBuilder("java","programa");
+			String acum ="";
+			ProcessBuilder pb = new ProcessBuilder("java","procesos_completo.programa");
 			pb.directory(new File("bin"));
-			
+			Process p = null;	
+			String pidaux ="";
+			for (int x=0; x<5; x++) {
 			try {
-				Process p = pb.start();				
+				p = pb.start();		
 				OutputStream os = p.getOutputStream();
-				String res = p.toString();
+				String res = tf3.getText() + "\n";
 				os.write(res.getBytes());
 				os.flush();
 				
-				String binary = new BigInteger(String.valueOf(p.pid()).getBytes()).toString(2);
-				resPid3.setText(binary);
-				resPidPadre3.setText(String.valueOf(p.toHandle().parent().get().pid()));
+				InputStream is = p.getInputStream();
 				
-				panel2.setText(res); //no consigo que muestre mas 
-			
+				//String binary = new BigInteger(String.valueOf(p.pid()).getBytes()).toString(2);//esto tb mal
+				pidaux += p.pid() + " ";
+				//resPid3 += p.pid()+ " ";			
+				//resPidPadre3.setText(String.valueOf(p.toHandle().parent().get().pid()));
+				resPidPadre3.setText(String.valueOf(p.toHandle().parent().get().pid()));
+				resPid3.setText(pidaux);
+				int c;
+				while((c = is.read()) != -1) {
+					acum +=(char) c;
+				}
+				
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			}//fin for
+			
+			panel2.setText(acum); //no consigo que muestre mas 
 		}
 	});
 	

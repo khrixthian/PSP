@@ -12,7 +12,7 @@ public class Ejer3 {
 		// TODO Auto-generated method stub
 		
 		
-		ProcessBuilder pb = new ProcessBuilder("java","EjemploLectura");
+		ProcessBuilder pb = new ProcessBuilder("java","psp.EjemploLectura");
 		pb.directory(new File("bin"));
 		Process p = pb.start();
 
