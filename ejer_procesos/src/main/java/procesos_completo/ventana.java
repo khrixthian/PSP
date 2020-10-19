@@ -130,7 +130,7 @@ public class ventana extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e)  {
 			String acum ="";
-			ProcessBuilder pb = new ProcessBuilder("java","procesos_completo.programa");
+			ProcessBuilder pb = new ProcessBuilder("java", "E:\\DESARROLLO DE APLICACIONES MULTIMEDIA\\2 ANYO\\PSP\\pspdiario\\PSP\\ejer_procesos\\src\\main\\java\\procesos_completo\\Programa.java");
 			pb.directory(new File("bin"));
 			Process p = null;	
 			String pidaux ="";
@@ -171,24 +171,34 @@ public class ventana extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			String prog = tf2.getText();
-			ProcessBuilder test = new ProcessBuilder();
-			test = test.command("CMD", "/C", prog);
-			Process p;
+			//String prog = tf2.getText();
+			ProcessBuilder test = new ProcessBuilder("CMD", "/C", tf2.getText());
+			//test = test.command("CMD", "/C", tf2.getText());
 			String res = test.toString();
+			String salida = null, acum = "";
 			
 			try {
-				test.start();
-				p = test.start();
-				
+				//test.start();
+				Process p = test.start();
+
 				resPid2.setText(String.valueOf(p.pid()));
 				resPidPadre2.setText(String.valueOf(p.toHandle().parent().get().pid()));
 				
-				panel1.setText(res);//no consigo que muestre mas
-				
+				InputStreamReader entrada = new InputStreamReader(p.getInputStream());
+				BufferedReader BR = new BufferedReader(entrada);
+
+				if((salida=BR.readLine()) != null){
+		        	System.out.println("Comando ejecutado Correctamente");
+		        	while ((salida=BR.readLine()) != null){
+		        		acum+=(salida+"\n");	        		
+		        	}
+					
+					panel1.setText(acum);//no consigo que muestre mas	
+		        }else{
+		        	System.out.println("No se a producido ninguna salida");
+		        }			
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}

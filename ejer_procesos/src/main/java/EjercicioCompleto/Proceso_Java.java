@@ -148,7 +148,7 @@ public class Proceso_Java extends JFrame {
 		btnLlamar5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String acumulador ="",PID="";
-				ProcessBuilder pb = new ProcessBuilder("java","EjercicioCompleto.Programa");
+				ProcessBuilder pb = new ProcessBuilder("java", "E:\\DESARROLLO DE APLICACIONES MULTIMEDIA\\2 ANYO\\PSP\\pspdiario\\PSP\\ejer_procesos\\src\\main\\java\\procesos_completo\\Programa.java");
 				pb.directory(new File("bin"));
 				Process p = null;
 				for (int x=0;x<5;x++) {
@@ -159,11 +159,13 @@ public class Proceso_Java extends JFrame {
 					os.write(dato.getBytes());
 					os.flush();
 					InputStream is = p.getInputStream();
-					int c;
+					InputStreamReader isr = new InputStreamReader(is);
+					BufferedReader bf = new BufferedReader(isr);
+					String c;
 					PID+=p.pid()+" ";//pid
 					PadreLLamar5.setText(""+p.toHandle().parent().get().pid());//Version del padre
-					while ((c = is.read()) != -1)
-						acumulador+=(char) c;
+					while ((c = bf.readLine()) != null)
+						acumulador+= c;
 				} catch (IOException e) {
 					e.printStackTrace();
 				}			
