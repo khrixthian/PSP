@@ -9,7 +9,7 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipFichero extends Thread{
 
-	static public void zipIt(String FicheroZip, String FicheroAComprimir) {
+	public static void zipIt(String FicheroZip, String FicheroAComprimir) {
         
         byte[] buffer = new byte[1024];
  

@@ -131,23 +131,20 @@ public class ventana extends JFrame {
 		public void actionPerformed(ActionEvent e)  {
 			String acum ="";
 			ProcessBuilder pb = new ProcessBuilder("java", "E:\\DESARROLLO DE APLICACIONES MULTIMEDIA\\2 ANYO\\PSP\\pspdiario\\PSP\\ejer_procesos\\src\\main\\java\\procesos_completo\\Programa.java");
-			pb.directory(new File("bin"));
+			pb.directory(new File("bin"));//importante poner esto que es donde estan los ejecutables de java
 			Process p = null;	
 			String pidaux ="";
 			for (int x=0; x<5; x++) {
 			try {
 				p = pb.start();		
 				OutputStream os = p.getOutputStream();
-				String res = tf3.getText() + "\n";
+				String res = tf3.getText() + "\n";//importante el salto de linea
 				os.write(res.getBytes());
 				os.flush();
 				
 				InputStream is = p.getInputStream();
 				
-				//String binary = new BigInteger(String.valueOf(p.pid()).getBytes()).toString(2);//esto tb mal
 				pidaux += p.pid() + " ";
-				//resPid3 += p.pid()+ " ";			
-				//resPidPadre3.setText(String.valueOf(p.toHandle().parent().get().pid()));
 				resPidPadre3.setText(String.valueOf(p.toHandle().parent().get().pid()));
 				resPid3.setText(pidaux);
 				int c;
@@ -157,12 +154,12 @@ public class ventana extends JFrame {
 				
 				
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
-			}//fin for
+			}
 			
-			panel2.setText(acum); //no consigo que muestre mas 
+			panel2.setText(acum);
 		}
 	});
 	
@@ -171,14 +168,13 @@ public class ventana extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			//String prog = tf2.getText();
 			ProcessBuilder test = new ProcessBuilder("CMD", "/C", tf2.getText());
-			//test = test.command("CMD", "/C", tf2.getText());
+			
 			String res = test.toString();
 			String salida = null, acum = "";
 			
 			try {
-				//test.start();
+				
 				Process p = test.start();
 
 				resPid2.setText(String.valueOf(p.pid()));
@@ -193,7 +189,7 @@ public class ventana extends JFrame {
 		        		acum+=(salida+"\n");	        		
 		        	}
 					
-					panel1.setText(acum);//no consigo que muestre mas	
+					panel1.setText(acum);
 		        }else{
 		        	System.out.println("No se a producido ninguna salida");
 		        }			
