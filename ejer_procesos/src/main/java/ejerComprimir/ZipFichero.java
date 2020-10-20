@@ -9,34 +9,39 @@ import java.util.zip.ZipOutputStream;
 
 public class ZipFichero extends Thread{
 
-	static public void zipIt(String FicheroZip, String FicheroAComprimir) 
-	{
-
+	static public void zipIt(String FicheroZip, String FicheroAComprimir) {
         
         byte[] buffer = new byte[1024];
  
-        FileOutputStream fos = null;
+        FileOutputStream fos = null;//escribir en un fichero
 		try {
-			fos = new FileOutputStream(FicheroZip);
+			
+			fos = new FileOutputStream(FicheroZip);//crea el fichero
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		
         ZipOutputStream zos = new ZipOutputStream(fos); 
     	ZipEntry ze = new ZipEntry(FicheroAComprimir);
+    	
         try {
 			zos.putNextEntry(ze);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
         FileInputStream in = null;
+        
 		try {
 			in = new FileInputStream(FicheroAComprimir);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
         int len;
         try {
 			while ((len = in.read(buffer)) > 0)
@@ -45,6 +50,7 @@ public class ZipFichero extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
         try {
 			zos.closeEntry();
 		} catch (IOException e) {
