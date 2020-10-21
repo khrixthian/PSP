@@ -30,17 +30,17 @@ public class VentanaContadorReloj extends JFrame{
 		
 		JLabel atras = new JLabel("<<");
 		atras.setFont(new Font("Tahoma", Font.PLAIN, 76));
-		atras.setBounds(10, 66, 115, 61);
+		atras.setBounds(43, 66, 115, 61);
 		contentPane.add(atras);
 		
 		JLabel adelante = new JLabel(">>");
 		adelante.setFont(new Font("Tahoma", Font.PLAIN, 76));
-		adelante.setBounds(429, 66, 115, 61);
+		adelante.setBounds(383, 66, 115, 61);
 		contentPane.add(adelante);
 		
 		JLabel reloj = new JLabel("00:00");
-		reloj.setFont(new Font("Tahoma", Font.PLAIN, 46));
-		reloj.setBounds(128, 66, 308, 61);
+		reloj.setFont(new Font("Tahoma", Font.PLAIN, 76));
+		reloj.setBounds(168, 66, 205, 61);
 		contentPane.add(reloj);
 		
 		JButton iniciar = new JButton("INICIAR");
@@ -68,14 +68,16 @@ public class VentanaContadorReloj extends JFrame{
 		
 		//Cambiar el color de las flechas cada 2 segundos mientras no se de a salir
 		//solo lo cambia una vez y cuando salta la ventana ya viene cambiado el color de la 1 label
-		do {
+		//do {
 			EtiketaThread ColorR1 = new EtiketaThread(atras);
 			EtiketaThread ColorR2 = new EtiketaThread(adelante);				
 			Thread Colort1 = new Thread(ColorR1);
 			Thread Colort2 = new Thread(ColorR2);
 			Colort1.setPriority(Colort1.MIN_PRIORITY);
 			Colort2.setPriority(Colort2.MIN_PRIORITY);
-				
+			Colort1.start();
+			Colort2.start();
+			/*
 				try {
 					Thread.sleep(2000);
 					Colort1.start();
@@ -84,9 +86,9 @@ public class VentanaContadorReloj extends JFrame{
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}  */
 			
-		}while(SalirPresionado = false);
+		//}while(SalirPresionado = false);
 		
 		iniciar.addActionListener(new ActionListener() {
 			@Override
