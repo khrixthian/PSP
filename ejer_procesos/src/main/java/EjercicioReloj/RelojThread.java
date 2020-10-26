@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 public class RelojThread extends Thread {
 	JLabel etiketa = new JLabel();
 	String min = "", seg = "";
-	boolean cronoact;
+	boolean cronoact = true;
 
 	public RelojThread(JLabel etiketa, boolean cronoact) {
 		super();
@@ -16,17 +16,33 @@ public class RelojThread extends Thread {
 
 	Thread h1;
 	String hora;
+	
+	public void cambiarFalse() {
+		this.cronoact = false;
+	}
 
 	@Override
 	public void run() {
 		int minutos = 0, segundos = 0, aux = 0;
-		// try {
-		while (this.cronoact == true) {
-			try {
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		System.out.println("fuera del while: " + cronoact);
+		
+		if(this.cronoact == true) {
+			
+			while (cronoact == true) {
+				try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			System.out.println(cronoact);
+			// mirar el valor del  cronoact			
+			
 			segundos += 1;
 
 			if (segundos == 60) {
@@ -49,9 +65,11 @@ public class RelojThread extends Thread {
 
 			hora = min + ":" + seg;
 			this.etiketa.setText(hora);
+			
 
 		} // while (cronoact == true);
-
+		
+		}//if
 	}// fin iniciar
-
+	
 }

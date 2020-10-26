@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 public class VentanaContadorReloj extends JFrame {
 
 	private JPanel contentPane;
-	private Thread rel = new Thread();
+	private RelojThread rel = null;
 	private Thread t2 = new Thread();
 	boolean Presionado = false;
 	boolean IniciarOk = false;
@@ -88,12 +88,8 @@ public class VentanaContadorReloj extends JFrame {
 				parar.setVisible(true);
 				pausar.setVisible(true);
 				cronoact = true;
-				if (cronoact = true) {
 					rel = new RelojThread(reloj, cronoact);
 					rel.start();
-
-				} else
-					cronoact = false;
 
 			}// fin void
 
@@ -102,8 +98,7 @@ public class VentanaContadorReloj extends JFrame {
 		pausar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cronoact = false;
-
+				
 			}
 
 		});// fin boton
@@ -111,7 +106,9 @@ public class VentanaContadorReloj extends JFrame {
 		parar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				rel.cambiarFalse();
+				cronoact = false;
+				//reloj.setText("00:00");
 			}
 
 		});// fin boton
@@ -119,14 +116,14 @@ public class VentanaContadorReloj extends JFrame {
 		reiniciar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cronoact = true;
+				Presionado = true;
 				if (Presionado = true) {
-					rel.interrupt();
-					JLabel newreloj = new JLabel();
-					newreloj = reloj;
-					reloj.setVisible(false);
-					newreloj.setVisible(true);
-					newreloj.setText("00:00");
+					
+					//JLabel newreloj = new JLabel();
+					//newreloj = reloj;
+					//reloj.setVisible(false);
+					//newreloj.setVisible(true);
+					reloj.setText("00:00");
 					RelojThread rel = new RelojThread(reloj, cronoact);
 					rel.start();
 
