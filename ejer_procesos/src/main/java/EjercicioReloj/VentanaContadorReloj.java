@@ -13,15 +13,14 @@ public class VentanaContadorReloj extends JFrame {
 
 	private JPanel contentPane;
 	private RelojThread rel = null;
-	private Thread t2 = new Thread();
+	private RelojThread rel2 = null;
 	boolean Presionado = false;
 	boolean IniciarOk = false;
 	private boolean cronoact;
+	private int onoff = 0;
 
 	// para la prueba de agrupar botones
 	JLabel reloj = new JLabel("00:00");
-	int onoff = 0;
-	// private JLabel reloj = new JLabel("00:00");
 
 	public VentanaContadorReloj() {
 		setSize(550, 300);
@@ -88,8 +87,8 @@ public class VentanaContadorReloj extends JFrame {
 				parar.setVisible(true);
 				pausar.setVisible(true);
 				cronoact = true;
-					rel = new RelojThread(reloj, cronoact);
-					rel.start();
+				rel = new RelojThread(reloj, cronoact);
+				rel.start();
 
 			}// fin void
 
@@ -98,7 +97,7 @@ public class VentanaContadorReloj extends JFrame {
 		pausar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 			}
 
 		});// fin boton
@@ -107,8 +106,7 @@ public class VentanaContadorReloj extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rel.cambiarFalse();
-				cronoact = false;
-				//reloj.setText("00:00");
+
 			}
 
 		});// fin boton
@@ -116,18 +114,7 @@ public class VentanaContadorReloj extends JFrame {
 		reiniciar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Presionado = true;
-				if (Presionado = true) {
-					
-					//JLabel newreloj = new JLabel();
-					//newreloj = reloj;
-					//reloj.setVisible(false);
-					//newreloj.setVisible(true);
-					reloj.setText("00:00");
-					RelojThread rel = new RelojThread(reloj, cronoact);
-					rel.start();
-
-				}
+				rel.reiniciar();
 			}
 
 		});// fin boton
@@ -135,11 +122,10 @@ public class VentanaContadorReloj extends JFrame {
 		salir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (Presionado = true) {
-					Colort1.interrupt();
-					Colort2.interrupt();
-					System.exit(0);
-				}
+
+				Colort1.interrupt();
+				Colort2.interrupt();
+				System.exit(0);
 
 			}
 
@@ -147,10 +133,9 @@ public class VentanaContadorReloj extends JFrame {
 
 	}
 
+	// prueba para acciones de los botones // Esto es para el boton iniciar y
+	// reiniciar
 	/*
-	 * prueba para acciones de los botones // Esto es para el boton iniciar y
-	 * reiniciar
-	 * 
 	 * public void actionPerformed(ActionEvent evt) { Object o = evt.getSource(); if
 	 * (o instanceof JButton) { JButton btn = (JButton) o; if
 	 * (btn.getText().equals("INICIAR")) { if (onoff == 0) { onoff = 1;
@@ -160,6 +145,6 @@ public class VentanaContadorReloj extends JFrame {
 	 * (btn.getText().equals("PARAR")) { if (onoff == 1) { onoff = 0; cronoact =
 	 * false; System.out.println("entro bbbbbbbbbbbbbbbbbb"); } } } }
 	 * 
-	 */// fin prueba
-
+	 * // fin prueba
+	 */
 }

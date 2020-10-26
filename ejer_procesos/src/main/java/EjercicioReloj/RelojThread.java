@@ -6,6 +6,7 @@ public class RelojThread extends Thread {
 	JLabel etiketa = new JLabel();
 	String min = "", seg = "";
 	boolean cronoact = true;
+	int minutos = 0, segundos = 0, aux = 0;
 
 	public RelojThread(JLabel etiketa, boolean cronoact) {
 		super();
@@ -16,60 +17,62 @@ public class RelojThread extends Thread {
 
 	Thread h1;
 	String hora;
-	
+
 	public void cambiarFalse() {
 		this.cronoact = false;
 	}
 
-	@Override
+	public void cambiarTrue() {
+		this.cronoact = true;
+	}
+
 	public void run() {
-		int minutos = 0, segundos = 0, aux = 0;
-		
+
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		System.out.println("fuera del while: " + cronoact);
-		
-		if(this.cronoact == true) {
-			
+
+		if (cronoact) {
+
 			while (cronoact == true) {
 				try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
+				segundos += 1;
+
+				if (segundos == 60) {
+					segundos = 0;
+					minutos++;
+				}
+
+				if (minutos < 10) {
+					min = "0" + minutos;
+
+				} else {
+					min = Integer.toString(minutos);
+				}
+
+				if (segundos < 10) {
+					seg = "0" + segundos;
+				} else {
+					seg = Integer.toString(segundos);
+				}
+
+				hora = min + ":" + seg;
+				this.etiketa.setText(hora);
+
 			}
-			System.out.println(cronoact);
-			// mirar el valor del  cronoact			
-			
-			segundos += 1;
-
-			if (segundos == 60) {
-				segundos = 0;
-				minutos++;
-			}
-
-			if (minutos < 10) {
-				min = "0" + minutos;
-
-			} else {
-				min = Integer.toString(minutos);
-			}
-
-			if (segundos < 10) {
-				seg = "0" + segundos;
-			} else {
-				seg = Integer.toString(segundos);
-			}
-
-			hora = min + ":" + seg;
-			this.etiketa.setText(hora);
-			
-
-		} // while (cronoact == true);
-		
-		}//if
+		} // if
 	}// fin iniciar
-	
+
+	public void reiniciar() {
+		minutos = 0;
+		segundos = 0;
+	}
+
 }
