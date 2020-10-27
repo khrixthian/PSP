@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class VentanaContadorReloj extends JFrame {
+public class VentanaContadorReloj extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private RelojThread rel = null;
@@ -18,8 +18,15 @@ public class VentanaContadorReloj extends JFrame {
 	boolean IniciarOk = false;
 	private boolean cronoact;
 	private int onoff = 0;
+	private boolean auxpausar = false;
+	JButton iniciar;
+	JButton parar;
+	JButton pausar;
+	JButton reiniciar;
+	JButton salir;
+	Thread Colort1;
+	Thread Colort2;
 
-	// para la prueba de agrupar botones
 	JLabel reloj = new JLabel("00:00");
 
 	public VentanaContadorReloj() {
@@ -47,104 +54,85 @@ public class VentanaContadorReloj extends JFrame {
 		reloj.setBounds(165, 66, 213, 61);
 		contentPane.add(reloj);
 
-		JButton iniciar = new JButton("INICIAR");
+		iniciar = new JButton("INICIAR");
 		iniciar.setBounds(28, 191, 89, 23);
 		contentPane.add(iniciar);
 
-		JButton pausar = new JButton("PAUSAR");
+		pausar = new JButton("PAUSAR");
 		pausar.setBounds(128, 191, 89, 23);
 		contentPane.add(pausar);
 		pausar.setVisible(false);
 
-		JButton parar = new JButton("PARAR");
+		parar = new JButton("PARAR");
 		parar.setBounds(227, 191, 89, 23);
 		contentPane.add(parar);
 		parar.setVisible(false);
 
-		JButton reiniciar = new JButton("REINICIAR");
+		reiniciar = new JButton("REINICIAR");
 		reiniciar.setBounds(326, 191, 89, 23);
 		contentPane.add(reiniciar);
 		reiniciar.setVisible(false);
 
-		JButton salir = new JButton("SALIR");
+		salir = new JButton("SALIR");
 		salir.setBounds(425, 191, 89, 23);
 		contentPane.add(salir);
 
 		EtiketaThread ColorR1 = new EtiketaThread(atras);
 		EtiketaThread ColorR2 = new EtiketaThread(adelante);
-		Thread Colort1 = new Thread(ColorR1);
-		Thread Colort2 = new Thread(ColorR2);
+		Colort1 = new Thread(ColorR1);
+		Colort2 = new Thread(ColorR2);
+		Colort1.setName("Etiketa atras");
+		Colort2.setName("Etiketa adelante");
 		Colort1.setPriority(Colort1.MIN_PRIORITY);
 		Colort2.setPriority(Colort2.MIN_PRIORITY);
 		Colort1.start();
 		Colort2.start();
 
-		iniciar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				reiniciar.setVisible(true);
-				parar.setVisible(true);
-				pausar.setVisible(true);
-				cronoact = true;
-				rel = new RelojThread(reloj, cronoact);
-				rel.start();
-
-			}// fin void
-
-		});// fin boton
-
-		pausar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-
-		});// fin boton
-
-		parar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rel.cambiarFalse();
-
-			}
-
-		});// fin boton
-
-		reiniciar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				rel.reiniciar();
-			}
-
-		});// fin boton
-
-		salir.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				Colort1.interrupt();
-				Colort2.interrupt();
-				System.exit(0);
-
-			}
-
-		});// fin boton
-
+		// escuchadores
+		iniciar.addActionListener(this);
+		pausar.addActionListener(this);
+		parar.addActionListener(this);
+		reiniciar.addActionListener(this);
+		salir.addActionListener(this);
 	}
 
-	// prueba para acciones de los botones // Esto es para el boton iniciar y
-	// reiniciar
-	/*
-	 * public void actionPerformed(ActionEvent evt) { Object o = evt.getSource(); if
-	 * (o instanceof JButton) { JButton btn = (JButton) o; if
-	 * (btn.getText().equals("INICIAR")) { if (onoff == 0) { onoff = 1;
-	 * reiniciar.setVisible(true); parar.setVisible(true); pausar.setVisible(true);
-	 * RelojThread rel = new RelojThread(reloj, cronoact); rel.start();
-	 * System.out.println("entro aaaaaaaaaaaaa"); } } if
-	 * (btn.getText().equals("PARAR")) { if (onoff == 1) { onoff = 0; cronoact =
-	 * false; System.out.println("entro bbbbbbbbbbbbbbbbbb"); } } } }
-	 * 
-	 * // fin prueba
-	 */
+	public void actionPerformed(ActionEvent evt) {
+		Object obj = evt.getSource();
+		if (obj == iniciar) {
+			reiniciar.setVisible(true);
+			parar.setVisible(true);
+			pausar.setVisible(true);
+			iniciar.setEnabled(false);
+			reiniciar.setEnabled(true);
+			parar.setEnabled(true);
+			pausar.setEnabled(true);
+			cronoact = true;
+			rel = new RelojThread(reloj, cronoact);
+			rel.start();
+		}
+
+		if (obj == pausar) {
+
+			iniciar.setEnabled(auxpausar);
+			reiniciar.setEnabled(auxpausar);
+			parar.setEnabled(auxpausar);
+			auxpausar = !auxpausar;
+			rel.pausar();
+		}
+		if (obj == parar) {
+			rel.cambiarFalse();
+			iniciar.setEnabled(true);
+			reiniciar.setEnabled(false);
+			pausar.setEnabled(false);
+		}
+		if (obj == reiniciar) {
+			rel.reiniciar();
+		}
+		if (obj == salir) {
+			rel.cerrarHilo();
+			System.out.println("El hilo " + Colort1.getName() + " ha terminado.");
+			System.out.println("El hilo " + Colort2.getName() + " ha terminado.");
+			System.exit(0);
+		}
+	}
 }

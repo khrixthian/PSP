@@ -6,16 +6,18 @@ public class RelojThread extends Thread {
 	JLabel etiketa = new JLabel();
 	String min = "", seg = "";
 	boolean cronoact = true;
+	boolean cronoparado = false;
 	int minutos = 0, segundos = 0, aux = 0;
 
 	public RelojThread(JLabel etiketa, boolean cronoact) {
 		super();
 		this.etiketa = etiketa;
 		this.cronoact = cronoact;
-		// h1.start();
+		this.setName("Reloj");
+		this.setPriority(5);
+
 	}
 
-	Thread h1;
 	String hora;
 
 	public void cambiarFalse() {
@@ -26,6 +28,7 @@ public class RelojThread extends Thread {
 		this.cronoact = true;
 	}
 
+	@Override
 	public void run() {
 
 		try {
@@ -34,14 +37,13 @@ public class RelojThread extends Thread {
 			e.printStackTrace();
 		}
 
-		if (cronoact) {
-
-			while (cronoact == true) {
-				try {
-					Thread.sleep(1000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+		while (cronoact) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			if (!cronoparado) {
 
 				segundos += 1;
 
@@ -62,17 +64,30 @@ public class RelojThread extends Thread {
 				} else {
 					seg = Integer.toString(segundos);
 				}
+				if (minutos == 60) {
+					minutos = 0;
+				}
 
 				hora = min + ":" + seg;
 				this.etiketa.setText(hora);
+			} // if
+		} // while
+		System.out.println("El hilo " + this.getName() + " ha terminado.");
 
-			}
-		} // if
-	}// fin iniciar
+	}// fin run
 
 	public void reiniciar() {
 		minutos = 0;
 		segundos = 0;
 	}
 
+	public void cerrarHilo() {
+		this.cronoact = false;
+	}
+
+	public void pausar() {
+
+		this.cronoparado = !this.cronoparado;
+
+	}
 }
