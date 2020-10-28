@@ -14,23 +14,24 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 	private HiloContador hilo1;
 	private HiloContador hilo2;
 	private HiloContador hilo3;
-	JButton btnMenos3;
-	JButton btnMenos2;
-	JButton btnMenos1;
-	JButton btnMas3;
-	JButton btnMas2;
-	JButton btnMas1;
-	JButton btnFin1;
-	JButton btnFin2;
-	JButton btnFin3;
-	JLabel lblContHilo1;
-	JLabel lblContHilo2;
-	JLabel lblContHilo3;
-	JLabel lblPrioHilo1;
-	JLabel lblPrioHilo2;
-	JLabel lblPrioHilo3;
+	private JButton btnMenos3;
+	private JButton btnMenos2;
+	private JButton btnMenos1;
+	private JButton btnMas3;
+	private JButton btnMas2;
+	private JButton btnMas1;
+	private JButton btnFin1;
+	private JButton btnFin2;
+	private JButton btnFin3;
+	private JLabel lblContHilo1;
+	private JLabel lblContHilo2;
+	private JLabel lblContHilo3;
+	private JLabel lblPrioHilo1;
+	private JLabel lblPrioHilo2;
+	private JLabel lblPrioHilo3;
 	int prioridad;
 	String auxprio;
+	private boolean activo = true;
 
 	public PpalPrioridad() {
 		setSize(450, 600);
@@ -39,14 +40,6 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setTitle("Ejercicio Prioridad");
-
-		// iniciar los hilos
-		hilo1 = new HiloContador(lblContHilo1, lblPrioHilo1, 5);
-		hilo2 = new HiloContador(lblContHilo2, lblPrioHilo2, 5);
-		hilo3 = new HiloContador(lblContHilo3, lblPrioHilo3, 5);
-		hilo1.start();
-		hilo2.start();
-		hilo3.start();
 
 		JButton btnFinTodos = new JButton("Finalizar todos");
 		btnFinTodos.setBounds(173, 224, 117, 23);
@@ -124,31 +117,42 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 		btnMenos3 = new JButton("--");
 		btnMenos3.setBounds(71, 172, 49, 23);
 		getContentPane().add(btnMenos3);
+
+		// iniciar los hilos
+		hilo1 = new HiloContador(lblContHilo1, lblPrioHilo1, 5);
+		hilo2 = new HiloContador(lblContHilo2, lblPrioHilo2, 5);
+		hilo3 = new HiloContador(lblContHilo3, lblPrioHilo3, 5);
+		hilo1.start();
+		hilo2.start();
+		hilo3.start();
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent evt) {
 		Object obj1 = evt.getSource();
-		boolean activo = true;
 
 		if (obj1 == btnFin1) {
 
 			hilo1.fin1Hilo();
 		} else if (obj1 == btnFin2) {
 			hilo2.fin1Hilo();
-		} else
+		} else {
 			hilo3.fin1Hilo();
-
+		}
 		if (obj1 == btnMenos1) {
 			auxprio = lblPrioHilo1.getText();
+			// System.out.println(auxprio);
 			prioridad = Integer.parseInt(auxprio);
 			if (prioridad == 10) {
 				prioridad = 5;
 			} else if (prioridad == 5) {
 				prioridad = 0;
-			} else
+			} else {
 				prioridad = 0;
+			}
 			hilo1.cambioPrioridad(lblPrioHilo1, prioridad);
+			// System.out.println(lblPrioHilo1.getText().toString());
 		}
 
 		if (obj1 == btnMenos2) {
@@ -158,8 +162,9 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 				prioridad = 5;
 			} else if (prioridad == 5) {
 				prioridad = 0;
-			} else
+			} else {
 				prioridad = 0;
+			}
 			hilo2.cambioPrioridad(lblPrioHilo1, prioridad);
 		}
 
@@ -170,8 +175,9 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 				prioridad = 5;
 			} else if (prioridad == 5) {
 				prioridad = 0;
-			} else
+			} else {
 				prioridad = 0;
+			}
 			hilo3.cambioPrioridad(lblPrioHilo1, prioridad);
 		}
 
