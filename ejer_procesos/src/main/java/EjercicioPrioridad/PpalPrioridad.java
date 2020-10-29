@@ -23,6 +23,7 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 	private JButton btnFin1;
 	private JButton btnFin2;
 	private JButton btnFin3;
+	private JButton btnFinTodo;
 	private JLabel lblContHilo1;
 	private JLabel lblContHilo2;
 	private JLabel lblContHilo3;
@@ -40,11 +41,6 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setTitle("Ejercicio Prioridad");
-
-		JButton btnFinTodos = new JButton("Finalizar todos");
-		btnFinTodos.setBounds(173, 224, 117, 23);
-		btnFinTodos.setVisible(true);
-		getContentPane().add(btnFinTodos);
 
 		lblContHilo1 = new JLabel("Hilo 1: 0");
 		lblContHilo1.setHorizontalAlignment(SwingConstants.CENTER);
@@ -118,13 +114,30 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 		btnMenos3.setBounds(71, 172, 49, 23);
 		getContentPane().add(btnMenos3);
 
+		btnFinTodo = new JButton("Fin todos");
+		btnFinTodo.setBounds(185, 237, 89, 23);
+		getContentPane().add(btnFinTodo);
+
 		// iniciar los hilos
 		hilo1 = new HiloContador(lblContHilo1, lblPrioHilo1, 5);
 		hilo2 = new HiloContador(lblContHilo2, lblPrioHilo2, 5);
 		hilo3 = new HiloContador(lblContHilo3, lblPrioHilo3, 5);
+
 		hilo1.start();
 		hilo2.start();
 		hilo3.start();
+
+		// escutxadores
+		btnFin1.addActionListener(this);
+		btnFin2.addActionListener(this);
+		btnFin3.addActionListener(this);
+		btnMenos1.addActionListener(this);
+		btnMenos2.addActionListener(this);
+		btnMenos3.addActionListener(this);
+		btnMas1.addActionListener(this);
+		btnMas2.addActionListener(this);
+		btnMas3.addActionListener(this);
+		btnFinTodo.addActionListener(this);
 
 	}
 
@@ -132,53 +145,104 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent evt) {
 		Object obj1 = evt.getSource();
 
-		if (obj1 == btnFin1) {
+		if (obj1 == btnFinTodo) {
+			hilo1.fin1Hilo();
+			hilo2.fin1Hilo();
+			hilo3.fin1Hilo();
+		}
 
+		if (obj1 == btnFin1) {
 			hilo1.fin1Hilo();
 		} else if (obj1 == btnFin2) {
 			hilo2.fin1Hilo();
-		} else {
+		} else if (obj1 == btnFin3) {
 			hilo3.fin1Hilo();
 		}
+
 		if (obj1 == btnMenos1) {
 			auxprio = lblPrioHilo1.getText();
-			// System.out.println(auxprio);
 			prioridad = Integer.parseInt(auxprio);
 			if (prioridad == 10) {
 				prioridad = 5;
-			} else if (prioridad == 5) {
+			} else if (prioridad == 5) { // aki da algun fallo kuando es 5 y bajas salta error ???? si le pongo 1 no da
+											// error
 				prioridad = 0;
-			} else {
+			} else if (prioridad == 0) {
 				prioridad = 0;
 			}
+			hilo1.setPriority(prioridad);
 			hilo1.cambioPrioridad(lblPrioHilo1, prioridad);
-			// System.out.println(lblPrioHilo1.getText().toString());
 		}
 
 		if (obj1 == btnMenos2) {
-			auxprio = lblPrioHilo1.getText();
+			auxprio = lblPrioHilo2.getText();
 			prioridad = Integer.parseInt(auxprio);
 			if (prioridad == 10) {
 				prioridad = 5;
 			} else if (prioridad == 5) {
 				prioridad = 0;
-			} else {
+			} else if (prioridad == 0) {
 				prioridad = 0;
 			}
-			hilo2.cambioPrioridad(lblPrioHilo1, prioridad);
+			hilo2.setPriority(prioridad);
+			hilo2.cambioPrioridad(lblPrioHilo2, prioridad);
+
 		}
 
 		if (obj1 == btnMenos3) {
-			auxprio = lblPrioHilo1.getText();
+			auxprio = lblPrioHilo3.getText();
 			prioridad = Integer.parseInt(auxprio);
 			if (prioridad == 10) {
 				prioridad = 5;
 			} else if (prioridad == 5) {
 				prioridad = 0;
-			} else {
+			} else if (prioridad == 0) {
 				prioridad = 0;
 			}
-			hilo3.cambioPrioridad(lblPrioHilo1, prioridad);
+			hilo3.setPriority(prioridad);
+			hilo3.cambioPrioridad(lblPrioHilo3, prioridad);
+		}
+
+		if (obj1 == btnMas1) {
+			auxprio = lblPrioHilo1.getText();
+			prioridad = Integer.parseInt(auxprio);
+			if (prioridad == 10) {
+				prioridad = 10;
+			} else if (prioridad == 5) {
+				prioridad = 10;
+			} else if (prioridad == 0) {
+				prioridad = 5;
+			}
+			hilo1.setPriority(prioridad);
+			hilo1.cambioPrioridad(lblPrioHilo1, prioridad);
+		}
+
+		if (obj1 == btnMas2) {
+			auxprio = lblPrioHilo1.getText();
+			prioridad = Integer.parseInt(auxprio);
+			if (prioridad == 10) {
+				prioridad = 10;
+			} else if (prioridad == 5) {
+				prioridad = 10;
+			} else if (prioridad == 0) {
+				prioridad = 5;
+			}
+			hilo2.setPriority(prioridad);
+			hilo2.cambioPrioridad(lblPrioHilo2, prioridad);
+		}
+
+		if (obj1 == btnMas3) {
+			auxprio = lblPrioHilo3.getText();
+			prioridad = Integer.parseInt(auxprio);
+			if (prioridad == 10) {
+				prioridad = 10;
+			} else if (prioridad == 5) {
+				prioridad = 10;
+			} else if (prioridad == 0) {
+				prioridad = 5;
+			}
+			hilo3.setPriority(prioridad);
+			hilo3.cambioPrioridad(lblPrioHilo3, prioridad);
 		}
 
 	}

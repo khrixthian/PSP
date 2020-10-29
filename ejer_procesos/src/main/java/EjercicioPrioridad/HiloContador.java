@@ -18,15 +18,29 @@ public class HiloContador extends Thread {
 		this.activo = activo;
 	}
 
-	public void run() {
+	public void fin1Hilo() {
+		this.activo = false;
+	}
 
+	public void cambioPrioridad(JLabel etiketa2, int prioridad) {
+		this.prioridad = prioridad;
+		this.etiketa2 = etiketa2;
+		auxprioridad = prioridad + "";
+		etiketa2.setText(auxprioridad);
+	}
+
+	public void run() {
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		while (activo == true) {
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
 			contador += 1;
 			auxcontador = contador + "";
 			auxprioridad = prioridad + "";
@@ -38,13 +52,4 @@ public class HiloContador extends Thread {
 		System.out.println("El hilo " + this.getName() + " ha terminado.");
 	}
 
-	public void fin1Hilo() {
-		this.activo = false;
-	}
-
-	public void cambioPrioridad(JLabel etiketa2, int prioridad) {
-		this.prioridad = prioridad;
-		this.etiketa2 = etiketa2;
-		System.out.println(prioridad);
-	}
 }
