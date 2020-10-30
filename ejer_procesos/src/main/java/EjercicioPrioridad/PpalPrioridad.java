@@ -164,11 +164,10 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 			prioridad = Integer.parseInt(auxprio);
 			if (prioridad == 10) {
 				prioridad = 5;
-			} else if (prioridad == 5) { // aki da algun fallo kuando es 5 y bajas salta error ???? si le pongo 1 no da
-											// error
-				prioridad = 0;
-			} else if (prioridad == 0) {
-				prioridad = 0;
+			} else if (prioridad == 5) {
+				prioridad = 1;
+			} else if (prioridad == 1) {
+				prioridad = 1;
 			}
 			hilo1.setPriority(prioridad);
 			hilo1.cambioPrioridad(lblPrioHilo1, prioridad);
@@ -180,9 +179,9 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 			if (prioridad == 10) {
 				prioridad = 5;
 			} else if (prioridad == 5) {
-				prioridad = 0;
-			} else if (prioridad == 0) {
-				prioridad = 0;
+				prioridad = 1;
+			} else if (prioridad == 1) {
+				prioridad = 1;
 			}
 			hilo2.setPriority(prioridad);
 			hilo2.cambioPrioridad(lblPrioHilo2, prioridad);
@@ -195,9 +194,9 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 			if (prioridad == 10) {
 				prioridad = 5;
 			} else if (prioridad == 5) {
-				prioridad = 0;
-			} else if (prioridad == 0) {
-				prioridad = 0;
+				prioridad = 1;
+			} else if (prioridad == 1) {
+				prioridad = 1;
 			}
 			hilo3.setPriority(prioridad);
 			hilo3.cambioPrioridad(lblPrioHilo3, prioridad);

@@ -14,7 +14,7 @@ public class HiloContador extends Thread {
 		super();
 		this.etiketa = etiketa;
 		this.etiketa2 = etiketa2;
-		this.prioridad = prioridad;
+		this.setPriority(prioridad);
 		this.activo = activo;
 	}
 
