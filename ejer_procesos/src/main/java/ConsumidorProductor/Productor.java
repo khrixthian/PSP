@@ -16,7 +16,7 @@ public class Productor extends Thread {
 			bProd.poner(letra);
 			System.out.print("Prod: " + letra + " ");
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

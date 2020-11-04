@@ -16,7 +16,6 @@ public class Buffer {
 			this.notify();
 			return this.contenido;
 		}
-		this.wait();
 		return (36);
 
 	}
