@@ -26,6 +26,7 @@ public class VentanaContadorReloj extends JFrame implements ActionListener {
 	JButton salir;
 	Thread Colort1;
 	Thread Colort2;
+	private int contador = 0;
 
 	JLabel reloj = new JLabel("00:00");
 
@@ -55,11 +56,11 @@ public class VentanaContadorReloj extends JFrame implements ActionListener {
 		contentPane.add(reloj);
 
 		iniciar = new JButton("INICIAR");
-		iniciar.setBounds(28, 191, 89, 23);
+		iniciar.setBounds(10, 191, 89, 23);
 		contentPane.add(iniciar);
 
 		pausar = new JButton("PAUSAR");
-		pausar.setBounds(128, 191, 89, 23);
+		pausar.setBounds(109, 191, 108, 23);
 		contentPane.add(pausar);
 		pausar.setVisible(false);
 
@@ -69,12 +70,12 @@ public class VentanaContadorReloj extends JFrame implements ActionListener {
 		parar.setVisible(false);
 
 		reiniciar = new JButton("REINICIAR");
-		reiniciar.setBounds(326, 191, 89, 23);
+		reiniciar.setBounds(326, 191, 109, 23);
 		contentPane.add(reiniciar);
 		reiniciar.setVisible(false);
 
 		salir = new JButton("SALIR");
-		salir.setBounds(425, 191, 89, 23);
+		salir.setBounds(445, 191, 89, 23);
 		contentPane.add(salir);
 
 		EtiketaThread ColorR1 = new EtiketaThread(atras);
@@ -86,6 +87,12 @@ public class VentanaContadorReloj extends JFrame implements ActionListener {
 		Colort1.setPriority(Colort1.MIN_PRIORITY);
 		Colort2.setPriority(Colort2.MIN_PRIORITY);
 		Colort1.start();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Colort2.start();
 
 		// escuchadores
@@ -112,7 +119,13 @@ public class VentanaContadorReloj extends JFrame implements ActionListener {
 		}
 
 		if (obj == pausar) {
-
+			if (contador == 0) {
+				pausar.setText("REANUDAR");
+				contador = 1;
+			} else {
+				pausar.setText("PAUSAR");
+				contador = 0;
+			}
 			iniciar.setEnabled(auxpausar);
 			reiniciar.setEnabled(auxpausar);
 			parar.setEnabled(auxpausar);

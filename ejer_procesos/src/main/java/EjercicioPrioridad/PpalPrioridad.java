@@ -209,7 +209,7 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 				prioridad = 10;
 			} else if (prioridad == 5) {
 				prioridad = 10;
-			} else if (prioridad == 0) {
+			} else if (prioridad == 1) {
 				prioridad = 5;
 			}
 			hilo1.setPriority(prioridad);
@@ -217,13 +217,13 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 		}
 
 		if (obj1 == btnMas2) {
-			auxprio = lblPrioHilo1.getText();
+			auxprio = lblPrioHilo2.getText();
 			prioridad = Integer.parseInt(auxprio);
 			if (prioridad == 10) {
 				prioridad = 10;
 			} else if (prioridad == 5) {
 				prioridad = 10;
-			} else if (prioridad == 0) {
+			} else if (prioridad == 1) {
 				prioridad = 5;
 			}
 			hilo2.setPriority(prioridad);
@@ -237,7 +237,7 @@ public class PpalPrioridad extends JFrame implements ActionListener {
 				prioridad = 10;
 			} else if (prioridad == 5) {
 				prioridad = 10;
-			} else if (prioridad == 0) {
+			} else if (prioridad == 1) {
 				prioridad = 5;
 			}
 			hilo3.setPriority(prioridad);

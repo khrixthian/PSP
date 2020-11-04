@@ -86,7 +86,6 @@ public class RelojThread extends Thread {
 	}
 
 	public void pausar() {
-
 		this.cronoparado = !this.cronoparado;
 
 	}
