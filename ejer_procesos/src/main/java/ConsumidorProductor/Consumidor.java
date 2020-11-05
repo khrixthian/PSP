@@ -15,7 +15,7 @@ public class Consumidor extends Thread {
 				e1.printStackTrace();
 			}
 			try {
-				Thread.sleep(2000);
+				Thread.sleep(5000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
