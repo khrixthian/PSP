@@ -23,11 +23,4 @@ public class Buffer {
 		return (this.contenido);
 
 	}
-
-//	public boolean estaLlena() throws InterruptedException {
-//		while (bufferLleno = true) {
-//			return true;
-//		}
-//		return false;
-//	}
 }
