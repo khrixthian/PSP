@@ -8,12 +8,6 @@ public class HiloEnvio extends Thread {
 
 	@Override
 	public void run() {
-		try {
-			this.wait();// esto tiene que estar en la bolsa
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		bolsa = Bolsa.getListaproductos();
 		if (bolsa.size() == 5) {
 			System.out.println("Envio la bolsa.");

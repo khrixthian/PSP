@@ -20,7 +20,7 @@ public class HiloRellena extends Thread {
 			bolsa.setListaproductos(listaproductos);
 			bolsa.setTamanyo(5);
 			bolsa.setLlena(true);
-			this.notify();// esto tiene que estar en la bolsa
+			// this.notify();// esto tiene que estar en la bolsa
 		}
 	}
 }

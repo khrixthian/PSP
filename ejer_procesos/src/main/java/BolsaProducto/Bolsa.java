@@ -34,4 +34,10 @@ public class Bolsa {
 	public void setLlena(boolean llena) {
 		this.llena = llena;
 	}
+
+	public void estaLlena() throws InterruptedException {
+		while (this.isLlena() == true) {
+			this.wait();
+		}
+	}
 }
