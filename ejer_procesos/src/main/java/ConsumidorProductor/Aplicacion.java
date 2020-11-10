@@ -7,7 +7,6 @@ public class Aplicacion {
 		Consumidor con = new Consumidor(b);
 		Productor prod = new Productor(b);
 		prod.start();
-		Thread.sleep(1000);
 		con.start();
 	}
 

@@ -3,12 +3,15 @@ package BolsaProducto;
 import java.util.ArrayList;
 
 public class Bolsa {
-	private ArrayList<Producto> listaproductos;
-	private Producto prod = new Producto("producto");
-	private int tamanyo = 0;
-	private boolean estallena = false;
+	private static ArrayList<Producto> listaproductos;
+	private int tamanyo;
+	private static boolean llena = false;
 
-	public ArrayList<Producto> getListaproductos() {
+	public Bolsa() {
+		super();
+	}
+
+	public static ArrayList<Producto> getListaproductos() {
 		return listaproductos;
 	}
 
@@ -16,47 +19,19 @@ public class Bolsa {
 		this.listaproductos = listaproductos;
 	}
 
-	public Producto getProd() {
-		return prod;
-	}
-
-	public void setProd(Producto prod) {
-		this.prod = prod;
-	}
-
-	public int getTamaño() {
+	public int getTamanyo() {
 		return tamanyo;
 	}
 
-	public void setTamaño(int tamaño) {
-		this.tamanyo = tamaño;
+	public void setTamanyo(int tamanyo) {
+		this.tamanyo = tamanyo;
 	}
 
-	public boolean isEstallena() {
-		return estallena;
+	public static boolean isLlena() {
+		return llena;
 	}
 
-	public void setEstallena(boolean estallena) {
-		this.estallena = estallena;
+	public void setLlena(boolean llena) {
+		this.llena = llena;
 	}
-
-	public void addProducto(Producto prod) {
-		for (int i = 1; i < 5; i++) {
-			prod.setNombre("producto" + i);
-			System.out.println("La bolsa tiene " + i + " productos.");
-			listaproductos.add(prod);
-		}
-		System.out.println("La bolsa está llena.");
-	}
-
-	public void estaLlena() {
-		if (listaproductos.size() == 5) {
-			estallena = true;
-		}
-	}
-
-	public void devtamanyo() {
-		tamanyo = listaproductos.size();
-	}
-
 }

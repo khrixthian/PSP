@@ -13,13 +13,14 @@ public class Productor extends Thread {
 		for (int i = 0; i < 10; i++) {
 			int x = (int) ((Math.random() * (97 - 122)) + 97);
 			char letra = (char) (x);
-			bProd.poner(letra);
-			System.out.print("Prod: " + letra + " ");
 			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				bProd.poner(letra);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+			System.out.print("Prod: " + letra + " ");
+
 		}
 	}
 }

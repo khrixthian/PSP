@@ -3,34 +3,31 @@ package ConsumidorProductor;
 public class Buffer {
 	boolean bufferLleno;
 	char contenido;
-	boolean lleno;
 
-	public synchronized void poner(char c) {
+	public synchronized void poner(char c) throws InterruptedException {
+		while (this.bufferLleno == true) {
+			this.wait();
+		}
 		this.contenido = c;
 		this.bufferLleno = true;
-		try {
-			this.wait();
-		} catch (InterruptedException e) {
-			// TODO Bloque catch generado automáticamente
-			e.printStackTrace();
-		}
+		this.notify();
 	}
 
 	public synchronized char recoger() throws InterruptedException {
 
-		while (this.bufferLleno == true) {
-			this.notify();
-			bufferLleno = false;
-			return this.contenido;
+		while (this.bufferLleno == false) {
+			this.wait();
 		}
-		return (36);
+		bufferLleno = false;
+		this.notify();
+		return (this.contenido);
 
 	}
 
-	public boolean estaLlena() throws InterruptedException {
-		while (bufferLleno = true) {
-			return true;
-		}
-		return false;
-	}
+//	public boolean estaLlena() throws InterruptedException {
+//		while (bufferLleno = true) {
+//			return true;
+//		}
+//		return false;
+//	}
 }
