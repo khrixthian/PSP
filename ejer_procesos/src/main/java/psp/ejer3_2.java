@@ -6,10 +6,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class ejer3_2 {
-
+	// NO FUNCIONA
 	public static void main(String[] args) throws IOException {
 
-		ProcessBuilder pb = new ProcessBuilder("java","ejer3_1");
+		ProcessBuilder pb = new ProcessBuilder("java", "ejer3_1");
 		pb.directory(new File("bin"));
 		Process p = pb.start();
 

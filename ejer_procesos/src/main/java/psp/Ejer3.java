@@ -6,13 +6,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class Ejer3 {
-
+	// NO FUNCIONA
 	public static void main(String[] args) throws IOException {
 
 		// TODO Auto-generated method stub
-		
-		
-		ProcessBuilder pb = new ProcessBuilder("java","psp.EjemploLectura");
+
+		ProcessBuilder pb = new ProcessBuilder("java", "psp.EjemploLectura");
 		pb.directory(new File("bin"));
 		Process p = pb.start();
 

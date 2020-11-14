@@ -7,6 +7,11 @@ public class HiloRellena extends Thread {
 	private static ArrayList<Producto> listaproductos = new ArrayList<Producto>();
 	private Producto prod;
 
+	public HiloRellena(Bolsa bolsa) {
+		super();
+		this.bolsa = bolsa;
+	}
+
 	@Override
 	public void run() {
 		for (int i = 0; i < 5; i++) {
@@ -22,5 +27,9 @@ public class HiloRellena extends Thread {
 			bolsa.setLlena(true);
 			// this.notify();// esto tiene que estar en la bolsa
 		}
+	}
+
+	public static ArrayList<Producto> devBolsa() {
+		return listaproductos;
 	}
 }

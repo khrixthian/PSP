@@ -36,8 +36,11 @@ public class Bolsa {
 	}
 
 	public void estaLlena() throws InterruptedException {
-		while (this.isLlena() == true) {
-			this.wait();
+		if (this.isLlena() == true) {
+			this.tamanyo = 5;
+			listaproductos = HiloRellena.devBolsa();
+			this.notify();
 		}
+
 	}
 }

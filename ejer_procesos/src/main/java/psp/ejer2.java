@@ -4,28 +4,30 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ejer2 {
-
+	// FUNCIONA
 	public static void main(String[] args) throws IOException {
-		
-		// ejer 2 Ejecutar un comando de windows. (Dir, Task, ...) y mostrar su resultado por pantalla.
+
+		// ejer 2 Ejecutar un comando de windows. (Dir, Task, ...) y mostrar su
+		// resultado por pantalla.
 		ProcessBuilder test = new ProcessBuilder();
 		test = test.command("CMD", "/C", "DIR");
-		
-		test.redirectOutput(ProcessBuilder.Redirect.INHERIT); //nuevo esto lleva a la consola
+
+		test.redirectOutput(ProcessBuilder.Redirect.INHERIT); // nuevo esto lleva a la consola
 		test.start();
-		
-		//directamente el resultado
-		
-		//	try { 
-		//	Process p1 = test.start(); 
-		//	InputStream is = p1.getInputStream(); 
-		//	System.out.println(); 
-		//	int c; 
-		//	while ((c = is.read()) != -1) 
-		//	System.out.print((char) c); is.close(); 
-		//	} catch (Exception e) { 
-		//	e.printStackTrace();
-		//	}
+
+		// pintar el resultado en el eclipse
+
+		// try { no hace falta el try
+		Process p1 = test.start();
+		InputStream is = p1.getInputStream();
+		System.out.println();
+		int c;
+		while ((c = is.read()) != -1)
+			System.out.print((char) c);
+		is.close();
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
 
 	}
 
