@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class HiloEnvio extends Thread {
 	ArrayList<Producto> guardarProductos = new ArrayList<Producto>();
-	private Bolsa bolsa;
+	private Bolsa bolsa = new Bolsa();
 	private boolean aux = bolsa.isLlena();
 
 	public HiloEnvio(Bolsa bolsa) {
@@ -15,7 +15,7 @@ public class HiloEnvio extends Thread {
 
 	@Override
 	public void run() {
-		System.out.println(bolsa.isLlena());
+
 		try {
 			guardarProductos = bolsa.getListaproductos();
 		} catch (InterruptedException e) {

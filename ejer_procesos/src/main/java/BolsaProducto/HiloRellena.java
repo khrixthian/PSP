@@ -22,7 +22,10 @@ public class HiloRellena extends Thread {
 			listaproductos.add(prod);
 		}
 		System.out.println("La bolsa está llena.");
-		bolsa.setListaproductos(listaproductos);
+		try {
+			bolsa.setListaproductos(listaproductos);
+		} catch (InterruptedException e) {
+		}
 		bolsa.setTamanyo(5);
 		bolsa.setLlena(true);
 	}

@@ -5,15 +5,19 @@ import java.util.ArrayList;
 public class Bolsa {
 	private ArrayList<Producto> listaproductos;
 	private int tamanyo;
-	private static boolean llena = false;
+	private boolean llena = false;
 
 	public Bolsa() {
 
 		super();
 	}
 
-	public ArrayList<Producto> getListaproductos() throws InterruptedException {
-		llena = false;
+	public synchronized ArrayList<Producto> getListaproductos() throws InterruptedException {
+		while (this.llena == false) {
+			this.wait();
+		}
+		this.llena = false;
+		this.notify();
 		return listaproductos;
 	}
 
@@ -21,8 +25,13 @@ public class Bolsa {
 		listaproductos.add(prod);
 	}
 
-	public synchronized void setListaproductos(ArrayList<Producto> listaproductos) {
+	public synchronized void setListaproductos(ArrayList<Producto> listaproductos) throws InterruptedException {
+		while (this.llena == true) {
+			this.wait();
+		}
 		this.listaproductos = listaproductos;
+		this.llena = true;
+		this.notify();
 	}
 
 	public int getTamanyo() {
@@ -33,7 +42,7 @@ public class Bolsa {
 		this.tamanyo = tamanyo;
 	}
 
-	public static boolean isLlena() {
+	public boolean isLlena() {
 		return llena;
 	}
 
@@ -43,7 +52,7 @@ public class Bolsa {
 
 	public Boolean estaLlena() throws InterruptedException {
 		while (llena == true) {
-			//this.wait();
+			// this.wait();
 			tamanyo = 5;
 			llena = true;
 			return llena;
