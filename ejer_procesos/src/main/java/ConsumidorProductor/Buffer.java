@@ -20,7 +20,7 @@ public class Buffer {
 		}
 		bufferLleno = false;
 		this.notify();
-		return (this.contenido);
+		return contenido;
 
 	}
 }

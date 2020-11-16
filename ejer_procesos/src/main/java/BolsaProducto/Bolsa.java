@@ -3,19 +3,25 @@ package BolsaProducto;
 import java.util.ArrayList;
 
 public class Bolsa {
-	private static ArrayList<Producto> listaproductos;
+	private ArrayList<Producto> listaproductos;
 	private int tamanyo;
 	private static boolean llena = false;
 
 	public Bolsa() {
+
 		super();
 	}
 
-	public static ArrayList<Producto> getListaproductos() {
+	public ArrayList<Producto> getListaproductos() throws InterruptedException {
+		llena = false;
 		return listaproductos;
 	}
 
-	public void setListaproductos(ArrayList<Producto> listaproductos) {
+	public void anyadirProducto(Producto prod) {
+		listaproductos.add(prod);
+	}
+
+	public synchronized void setListaproductos(ArrayList<Producto> listaproductos) {
 		this.listaproductos = listaproductos;
 	}
 
@@ -35,12 +41,15 @@ public class Bolsa {
 		this.llena = llena;
 	}
 
-	public void estaLlena() throws InterruptedException {
-		if (this.isLlena() == true) {
-			this.tamanyo = 5;
-			listaproductos = HiloRellena.devBolsa();
-			this.notify();
+	public Boolean estaLlena() throws InterruptedException {
+		while (llena == true) {
+			//this.wait();
+			tamanyo = 5;
+			llena = true;
+			return llena;
 		}
+		llena = false;
+		return llena;
 
 	}
 }
