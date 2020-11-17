@@ -14,20 +14,23 @@ public class HiloRellena extends Thread {
 
 	@Override
 	public void run() {
-		for (int i = 0; i < 5; i++) {
-			prod = new Producto("producto");
-			prod.setNombre("producto " + i);
-			System.out.println("La bolsa tiene " + (i + 1) + " productos. Y su nombre es: " + prod.getNombre());
-			// bolsa.anyadirProducto(prod);
-			listaproductos.add(prod);
+		while (true) {
+			for (int i = 0; i < 5; i++) {
+				prod = new Producto("producto");
+				prod.setNombre("producto " + i);
+				System.out.println("La bolsa tiene " + (i + 1) + " productos. Y su nombre es: " + prod.getNombre());
+				// bolsa.anyadirProducto(prod);
+				listaproductos.add(prod);
+			}
+			System.out.println("La bolsa está llena.");
+			try {
+				bolsa.setListaproductos(listaproductos);
+			} catch (InterruptedException e) {
+			}
+			bolsa.setTamanyo(5);
+			bolsa.setLlena(true);
 		}
-		System.out.println("La bolsa está llena.");
-		try {
-			bolsa.setListaproductos(listaproductos);
-		} catch (InterruptedException e) {
-		}
-		bolsa.setTamanyo(5);
-		bolsa.setLlena(true);
+
 	}
 
 	public ArrayList<Producto> enviarArray() {

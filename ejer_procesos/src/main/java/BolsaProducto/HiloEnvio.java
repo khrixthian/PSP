@@ -16,22 +16,27 @@ public class HiloEnvio extends Thread {
 	@Override
 	public void run() {
 
-		try {
-			guardarProductos = bolsa.getListaproductos();
-		} catch (InterruptedException e) {
-			// TODO Bloque catch generado automáticamente
-			e.printStackTrace();
-		}
+		// para que lo haga de continuo:
+		while (true) {
+			// las acciones
 
-		if (guardarProductos.size() == 5) {
-			System.out.println("Recibo la bolsa.");
-			System.out.println("Recorro la bolsa llena");
-			for (int i = 0; i < guardarProductos.size(); i++) {
-				System.out.println(
-						"Soy hilo envio y enseño el producto " + i + ": " + guardarProductos.get(i).getNombre());
+			try {
+				guardarProductos = bolsa.getListaproductos();
+			} catch (InterruptedException e) {
+				// TODO Bloque catch generado automáticamente
+				e.printStackTrace();
 			}
-		} else
-			System.out.println("error");
+
+			if (guardarProductos.size() == 5) {
+				System.out.println("Recibo la bolsa.");
+				System.out.println("Recorro la bolsa llena");
+				for (int i = 0; i < guardarProductos.size(); i++) {
+					System.out.println(
+							"Soy hilo envio y enseño el producto " + i + ": " + guardarProductos.get(i).getNombre());
+				}
+			} else
+				System.out.println("error");
+		}
 	}
 
 }
