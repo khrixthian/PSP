@@ -8,5 +8,11 @@ pipeline {
       }
     }
 
+    stage('') {
+      steps {
+        sh 'mvn test'
+      }
+    }
+
   }
 }
