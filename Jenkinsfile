@@ -4,6 +4,7 @@ pipeline {
     stage('Initialize') {
       steps {
         echo 'this is a minimal pipeline'
+        sh 'mvn package'
       }
     }
 
